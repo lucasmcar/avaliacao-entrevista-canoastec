@@ -9,6 +9,12 @@ header{
     border: 1px solid transparent;
 }
 
+.bg-nav
+{
+    color: #fff !important;
+    background-color: #006b85 !important;
+}
+
 footer{
     color: #000 !important;
     background-color: #ccc;

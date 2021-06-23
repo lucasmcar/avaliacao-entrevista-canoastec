@@ -79,12 +79,50 @@ class UsuarioDAO {
 
             $this->conexao = Conexao::connect()->prepare($sql);
             $this->conexao->execute();
+
+            $count = $this->conexao->rowCount();
+            if($count > 0) {
+                
+               header('location: ../visao/GuiUsuarios.php');
+               
+            }
             $this->conexao = null;
             return true;
 
         }catch(Exception $e){
             echo "Erro ao cadastrar o Usuario";
             return false;
+        }
+    }
+
+    function deletar($id)
+    {
+        $sql = "
+            DELETE 
+            FROM
+                usuario
+            WHERE
+            id_usuario = 
+                :id
+            ";
+        try
+        {
+            
+            $this->conexao = Conexao::connect()->prepare($sql);
+            $this->conexao->bindParam(':id', $id, PDO::PARAM_INT);
+            $this->conexao->execute();
+            $count = $this->conexao->rowCount();
+            if($count > 0)
+            {
+                return true;
+            }
+            $this->conexao = null;
+            
+
+        }
+        catch(Exception $e)
+        {
+            echo 'Não foi possível excluir usuário';
         }
     }
 

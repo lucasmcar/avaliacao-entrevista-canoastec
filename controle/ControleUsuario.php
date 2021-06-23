@@ -30,6 +30,18 @@ try {
             $dao->cadastrar($usuario);
             break;
 
+        case 'editar':
+            $dao = new UsuarioDao();
+
+    
+            break;
+        
+        case 'excluir':
+            $usuario = new UsuarioVO();
+            $dao = new UsuarioDAO();
+            $dao->deletar($usuario->getIdUsuario());
+            break;
+
     }
 } catch (Exception $exception) {
     die('Erro');

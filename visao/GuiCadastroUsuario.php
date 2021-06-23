@@ -5,51 +5,55 @@ include_once DIR_MODELO . 'UsuarioVO.class.php';
 ?>
 
 
-<div class="container">
-    <div class="row">
-    <form method="POST" action="../controle/ControleUsuario.php?op=salvar">
+<div class="container" id="app">
     
-       
+    <form method="POST"  action="../controle/ControleUsuario.php?op=salvar">
+
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" name="nm_usuario" id="nm_usuario" value="">
+            <input type="text"  class="form-control " name="nm_usuario" id="nm_usuario" value="">
         </div>
         <div class="form-group">
             <label>CPF</label>
-            <input type="text" class="form-control" name="nr_cpf" id="nr_cpf" value="">
+            <input type="text"  class="form-control" name="nr_cpf" id="nr_cpf" value="">
         </div>
     
         <div class="form-group">
             <label>Login</label>
-            <input type="text" class="form-control" name="ds_login" id="ds_login" value="">
-
+            <input type="text"  class="form-control " name="ds_login" id="ds_login" value="">
+        </div>
+        <div class="form-group">
             <label>Senha</label>
-            <input type="password" name="pw_senha" id="pw_senha" value="">
+            <input type="password"  class="form-control" name="pw_senha" id="pw_senha" value="">
         </div>
     
-        <div class="formulario-campos">
+        <div class="form-group">
             <label>Email</label>
-            <input type="text" name="ds_email" id="ds_email" value="">
-
-            <label>Perfil</label>
-            <select name="id_perfil" id="id_perfil">
+            <input type="text"  class="form-control" name="ds_email" id="ds_email" value="">
+        </div>
+        <div class="form-group">
+        <label>Perfil</label>
+            <select class="form-control" name="id_perfil" id="id_perfil">
                 <option value="1">Administrador</option>
                 <option value="2">Atendente</option>
                 <option value="3">Desenvolvedor</option>
             </select>
         </div>
     
-        <div class="formulario-campos">
-            <label>Ativo ?</label>
-            <input type="checkbox" name="ao_status" id="ao_status" value="1">
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="ao_status" id="ao_status" value="1">
+                Ativo ?
+            </label>
         </div>
     
-        <div class="botoes">
-            <button type="submit" class="">Salvar</button>
-            <button type="button">Voltar</button>
+        <div class="form-group">
+            <button type="submit" id="btnCadastrar" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-danger">Voltar</button>
         </div>
+        
     </form>
-    </div>
+    
 </div>
 
 <?php
