@@ -119,18 +119,4 @@ class UsuarioVO {
         $this->ds_email = $ds_email;
     }
 
-    public function mascaraCpf($valor, $mascara) {
-        $mascarado = '';
-        $k = 0;
-        for($i = 0; $i<=strlen($mascara)-1; $i++) {
-            if($mascara[$i] == '#') {
-                if(isset($valor[$k])) $mascarado .= $valor[$k++];
-            } else {
-                if(isset($mascara[$i])) $mascarado .= $mascara[$i];
-            }
-        }
-        return floatval($mascarado);
-    }
-    
-    
 }

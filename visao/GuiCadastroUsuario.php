@@ -5,7 +5,7 @@ include_once DIR_MODELO . 'UsuarioVO.class.php';
 ?>
 
 
-<div class="container" id="app">
+<main class="container" id="app">
     
     <form method="POST"  action="../controle/ControleUsuario.php?op=salvar">
 
@@ -54,7 +54,7 @@ include_once DIR_MODELO . 'UsuarioVO.class.php';
         
     </form>
     
-</div>
+</main>
 
 <?php
 include_once 'Footer.php';

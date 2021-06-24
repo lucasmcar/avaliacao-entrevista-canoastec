@@ -31,15 +31,26 @@ try {
             break;
 
         case 'editar':
+            $id = filter_input(INPUT_GET, 'id_usuario', FILTER_SANITIZE_NUMBER_INT);
+            
             $dao = new UsuarioDao();
 
+            $dao->editar($id);
     
             break;
         
         case 'excluir':
-            $usuario = new UsuarioVO();
+
+            $id = filter_input(INPUT_GET, 'id_usuario', FILTER_SANITIZE_NUMBER_INT);
+
             $dao = new UsuarioDAO();
-            $dao->deletar($usuario->getIdUsuario());
+
+            $dao->deletar($id);
+            break;
+
+        case 'pesquisar':
+            $dao = new UsuarioDAO();
+            $dao->pesquisar();
             break;
 
     }

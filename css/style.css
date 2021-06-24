@@ -15,10 +15,11 @@ header{
     background-color: #006b85 !important;
 }
 
-footer{
+.footer{
     color: #000 !important;
-    background-color: #ccc;
-    position:absolute;
-    bottom:0;
-    width:100%;
+    background-color: rgb(167, 164, 164);
+    display: block; 
+    position: relative; 
+    width: 100%; 
+    clear: both;
 }
