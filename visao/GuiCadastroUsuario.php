@@ -7,11 +7,12 @@ include_once DIR_MODELO . 'UsuarioVO.class.php';
 
 <main class="container" id="app">
     
-    <form method="POST"  action="../controle/ControleUsuario.php?op=salvar">
+    <form method="POST" action="../controle/ControleUsuario.php?op=salvar" name="form">
 
         <div class="form-group">
             <label>Nome</label>
             <input type="text"  class="form-control " name="nm_usuario" id="nm_usuario" value="">
+            <small id="nome_val" style="display: none"></small>
         </div>
         <div class="form-group">
             <label>CPF</label>
@@ -47,10 +48,10 @@ include_once DIR_MODELO . 'UsuarioVO.class.php';
             </label>
         </div>
     
-        <div class="form-group">
-            <button type="submit" id="btnCadastrar" class="btn btn-primary">Salvar</button>
-            <button type="button" class="btn btn-danger">Voltar</button>
-        </div>
+       
+        <button type="submit" onclick="return validar();" id="btnCadastrar" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-danger">Voltar</button>
+        
         
     </form>
     
@@ -64,6 +65,11 @@ include_once 'Footer.php';
 <style>
     .formulario-campos{
         margin: 1em 30%;
+    }
+
+    .red
+    {
+        color: red;
     }
 
     .botoes{

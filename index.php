@@ -12,6 +12,9 @@ include_once DIR_UTIL . 'Define.php';
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link href="css/style.css" rel="stylesheet">
+
+        <script src="js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
         <title>Entrevista</title>
     </head>
     <body>
@@ -42,31 +45,31 @@ include_once DIR_UTIL . 'Define.php';
             <div class="conteudo-instrucao">
                 <h2>Instruções</h2>
                 <p><strong>Configurações antes de codificar</strong></p>
-                <p><input type="checkbox" checked=true readonly>1 - No arquivo 'DeefineCredenciais.php' definir as variaveis de acordo com as configurações do seu banco de dados local.</p>
-                <p><input type="checkbox" checked=true readonly>2 - Criar um banco de dados chamado entrevista.</p>
-                <p><input type="checkbox" checked=true readonly>3 - Importar os dados do arquivo 'entrevista.sql'.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">1 - No arquivo 'DeefineCredenciais.php' definir as variaveis de acordo com as configurações do seu banco de dados local.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">2 - Criar um banco de dados chamado entrevista.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">3 - Importar os dados do arquivo 'entrevista.sql'.</p>
                 <p><strong>Modificar Tela de Listagem de Usuários</strong></p>
-                <p><input type="checkbox" checked=true readonly>1 - Exibir a data de cadastro no formato DD/MM/AAAA</p>
-                <p><input type="checkbox" checked=true readonly>2 - Ter uma coluna de ações, com botões para editar e deletar</p>
-                <p><input type="checkbox" checked=true readonly>3 - Em caso de não trazer registro, ter uma mensagem "nenhum registro encontrado" e não exibir a mensagem</p>
+                <p><input type="checkbox" checked=true onclick="return false;">1 - Exibir a data de cadastro no formato DD/MM/AAAA</p>
+                <p><input type="checkbox" checked=true onclick="return false;">2 - Ter uma coluna de ações, com botões para editar e deletar</p>
+                <p><input type="checkbox" checked=true onclick="return false;">3 - Em caso de não trazer registro, ter uma mensagem "nenhum registro encontrado" e não exibir a mensagem</p>
                 <p>4 - Criar uma area de filtro, que possa buscar por nome e cpf</p>
-                <p><input type="checkbox" checked=true readonly>5 - Exibir CPF no padrão ###.###.###-##</p>
+                <p><input type="checkbox" checked=true onclick="return false;">5 - Exibir CPF no padrão ###.###.###-##</p>
                 <br>
                 <p><strong>Modificar Tela de Cadastro de Usuários</strong></p>
                 <p>1 - Criar validação para não permitir salvar sem preencher todos os campos</p>
-                <p><input type="checkbox" checked=true readonly>2 - Após salvar redirecionar para tela de listagem, e mostrar mensagem de sucesso.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">2 - Após salvar redirecionar para tela de listagem, e mostrar mensagem de sucesso.</p>
                 <br>
                 <p><strong>Novas Funcionalidades</strong></p>
-                <p><input type="checkbox" checked=true readonly>1 - Possibilitar deletar registro</p>
-                <p>2 - Possibilitar edição dos dados.</p>
-                <p><input type="checkbox" checked=true readonly>3 - Criar menu com acesso as telas de cadastro e listagem.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">1 - Possibilitar deletar registro</p>
+                <p><input type="checkbox" checked=true onclick="return false;">2 - Possibilitar edição dos dados.</p>
+                <p><input type="checkbox" checked=true onclick="return false;">3 - Criar menu com acesso as telas de cadastro e listagem.</p>
                 <br>
-                <p><strong>Melhorias não obrigatórias - Pontos Extras</strong></p>
-                <p><input type="checkbox" checked=true readonly>1 - Exibir na listagem o perfil do usuário</p>
-                <p><input type="checkbox" checked=true readonly>2 - Incluir e usar a biblioteca Bootstrap ou Materialize</p>
-                <p><input type="checkbox" checked=true readonly>3 - Incluir e usar a biblioteca Jquery</p>
+                <p><strong>Melhorias não obrigatórias - Ponto Extra</strong>
+                <p><input type="checkbox" checked=true onclick="return false;">1 - Exibir na listagem o perfil do usuário</p>
+                <p><input type="checkbox" checked=true onclick="return false;">2 - Incluir e usar a biblioteca Bootstrap ou Materialize</p>
+                <p>3 - Incluir e usar a biblioteca Jquery</p>
                 <p>4 - Criar CRUD de perfil e fazer o relacionamento com usuário</p>
-                <p><input type="checkbox" checked=true> 5 - Nesta tela de instruções, criar checkbox para marcar que a tarefa foi concluida e salvar este estado sem usar a session do PHP e nem o banco de dados.</p>
+                <p><input type="checkbox" checked=true onclick="return false;"> 5 - Nesta tela de instruções, criar checkbox para marcar que a tarefa foi concluida e salvar este estado sem usar a session do PHP e nem o banco de dados.</p>
             </div>
 
         </div>
@@ -101,10 +104,10 @@ include_once DIR_UTIL . 'Define.php';
 
 </style>
 
-<script type="text/javascript">
-    function checkItem(item) {
-    var check1status = document.getElementById(item).checked;
-    document.getElementById(item).checked = check1status ;
-    localStorage.setItem(item, check1status);
-    }
+<script language="javascript">
+    $(document).ready(function()
+    {
+        $('input[type=checkbox]').attr("readonly", true);
+    });
+
 </script>

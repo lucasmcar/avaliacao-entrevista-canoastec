@@ -1,8 +1,7 @@
 <?php
 
 include_once DIR_PERSISTENCIA . 'Conexao.class.php';
-include_once DIR_MODELO . 'UsuarioVO.class.php';
-
+include_once DIR_MODELO . '/UsuarioVO.class.php';
 
 class UsuarioDAO {
     
@@ -17,6 +16,7 @@ class UsuarioDAO {
             $this->conexao = Conexao::connect()->query($query);
             
             $array = $this->conexao->fetchAll(PDO::FETCH_ASSOC);
+
             
             $usuarios = array();
 
@@ -36,6 +36,11 @@ class UsuarioDAO {
                 $usuario->setDtCadastro($obj['dt_cadastro']);
                 $usuario->setDtAlteracao($obj['dt_alteracao']);
                 $usuarios[] = $usuario;
+
+                if(count($usuarios) < 1)
+                {
+                    echo "Não foram encontrados registros";
+                }
 
             }
             $this->conexao = null;
@@ -48,21 +53,22 @@ class UsuarioDAO {
 
     //Pesquisa
 
-    function pesquisar() {
-
-        $nome = filter_input(INPUT_GET, 'u_nome');
-        $cpf = filter_input(INPUT_GET, 'u_cpf');
+    function pesquisarNomeCpf() {
 
         try{
-            $query = ("SELECT * FROM usuario u WHERE u.nm_usuario = :nome AND u.nr_cpf = :cpf");
+
+            $usuarioVO = new UsuarioVO();
+
+            $query = ("SELECT * FROM usuario WHERE nm_usuario LIKE %:nome% AND nr_cpf = :cpf");
+            
             $this->conexao = Conexao::connect()->query($query);
-            $this->conexao->bindParam(':nome', $nome);
-            $this->conexao->bindParam(':cpf', $cpf);
-            $array = $this->conexao->fetchAll(PDO::FETCH_ASSOC);
+            $this->conexao->bindParam(':nome', $usuarioVO->getNmUsuario());
+            $this->conexao->bindParam(':cpf', $usuarioVO->getNrCpf());
+            $linha = $this->conexao->fetchAll(PDO::FETCH_ASSOC);
             
             $usuarios = array();
 
-            foreach ($array as $obj) {
+            foreach ($linha as $obj) {
 
                 $usuario = new UsuarioVO();
                 $usuario->setIdUsuario($obj['id_usuario']);
@@ -81,9 +87,9 @@ class UsuarioDAO {
 
             }
             $this->conexao = null;
-            return $usuarios;
+            return $linha;
         }catch(Exception $e){
-            echo "Erro ao buscar os Usuarios";
+            echo "Erro ao buscar o usuario <br>". $e->getMessage();
             return false;
         }
     }
@@ -140,7 +146,10 @@ class UsuarioDAO {
 
     function deletar($id)
     {
-        $sql = "
+        
+        try
+        {
+            $sql = "
             DELETE 
             FROM
                 usuario
@@ -148,8 +157,6 @@ class UsuarioDAO {
             id_usuario = 
                 :id
             ";
-        try
-        {
             
             $this->conexao = Conexao::connect()->prepare($sql);
             $this->conexao->bindParam(':id', $id, PDO::PARAM_INT);
@@ -165,19 +172,39 @@ class UsuarioDAO {
         }
     }
 
-    function editar($id)
+    function editar(UsuarioVO $usuario)
     {
-        $sql = "
-            UPDATE
-                entrevista
-            SET
-            WHERE id_usuario =
-            :id
+        try
+        {
+            $sql = "
+                UPDATE
+                    usuario
+                SET
+                    nm_usuario = :nome,
+                    nr_cpf     = :cpf,
+                    ds_email   = :email,
+                    id_perfil  = :perfil,
+                    ao_status  = :status
+                WHERE 
+                    id_usuario = :id
         ";
-        $this->conexao = Conexao::connect()->prepare($sql);
-        $this->conexao->bindParam(':id', $id, PDO::PARAM_INT);
+            $this->conexao = Conexao::connect()->prepare($sql);
+            $this->conexao->bindValue(':id', $usuario->getIdUsuario());
+            $this->conexao->bindValue(':nome', $usuario->getNmUsuario());
+            $this->conexao->bindValue(':cpf', $usuario->getNrCpf());
+            $this->conexao->bindValue(':email', $usuario->getDsEmail());
+            $this->conexao->bindValue(':perfil', $usuario->getIdPerfil());
+            $this->conexao->bindValue(':status', $usuario->getAoStatus());
+            $this->conexao->execute();
 
+            echo "Registros alterados";
+            
+            $this->conexao = null;
+        } 
+        catch (Exception $e) 
+        {
+            echo 'Não foi possível atualizar'; 
+        }
+        
     }
-
-
 }

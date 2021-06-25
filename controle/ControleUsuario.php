@@ -28,14 +28,25 @@ try {
 
             $dao = new UsuarioDAO();
             $dao->cadastrar($usuario);
+
+            header('location: ../visao/GuiUsuarios.php');
             break;
 
         case 'editar':
-            $id = filter_input(INPUT_GET, 'id_usuario', FILTER_SANITIZE_NUMBER_INT);
+
+            $u = new UsuarioVO();
+
+            $u->setNmUsuario($_POST['us_nome']);
+            $u->setIdUsuario($_POST['id_usuario']);
+            $u->setNrCpf($_POST['us_cpf']);
+            $u->setDsEmail($_POST['us_email']);
+            $u->setIdPerfil($_POST['ao_status']);
+            $u->setIdPerfil($_POST['us_perfil']);
             
             $dao = new UsuarioDao();
+            $dao->editar($u);
 
-            $dao->editar($id);
+            header('location: ../visao/GuiUsuarios.php');
     
             break;
         
@@ -46,11 +57,19 @@ try {
             $dao = new UsuarioDAO();
 
             $dao->deletar($id);
+
+            header('location: ../visao/GuiUsuarios.php');
             break;
 
         case 'pesquisar':
+            $u = new UsuarioVO();
+
+            $u->setNmUsuario($_POST['user_nome']);
+            $u->setNrCpf($_POST['user_cpf']);
+
+
             $dao = new UsuarioDAO();
-            $dao->pesquisar();
+            $dao->pesquisarNomeCpf($u);
             break;
 
     }
